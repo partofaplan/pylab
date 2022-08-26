@@ -13,7 +13,7 @@ def ado_call():
     try:
         for i in pools:
             poolid = i
-            url = f"https://dev.azure.com/mindbody/_apis/distributedtask/pools/{poolid}/agents?api-version=6.0"
+            url = f"https://dev.azure.com/INSERT ORG HERE/_apis/distributedtask/pools/{poolid}/agents?api-version=6.0"
             response = requests.get(url, headers=headers)
             json_output = response.json()
             if json_output['count'] > 0:
