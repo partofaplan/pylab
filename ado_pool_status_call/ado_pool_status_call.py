@@ -6,7 +6,7 @@ import base64
 def ado_call():
     pools = [9, 54, 90, 95]
     username = "" # This can be an arbitrary value or you can just let it empty
-    password = "z3y733uqdskb5zuyjk5u6jt3mnuo6ichso5s6da662yxy4cbavba"
+    password = "PAT"
     userpass = username + ":" + password
     b64 = base64.b64encode(userpass.encode()).decode()
     headers = {"Authorization" : "Basic %s" % b64}
