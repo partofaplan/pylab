@@ -29,8 +29,8 @@ Resources:
           NEW_RELIC_ACCOUNT_ID: !Sub ${NRAccountId}
           NEW_RELIC_EXTENSION_SEND_FUNCTION_LOGS: true
           NEW_RELIC_EXTENSION_LOG_LEVEL: DEBUG
-          NEW_RELIC_LICENSE_KEY: 18c53ff94231c7403023fdca408cf798FFFFNRAL
-          NEW_RELIC_LICENSE_KEY_SECRET: 6E721A1E4A42FBF2C807D628522983A5CA091E05909A32ABF179FA41C9E0A0E5
+          NEW_RELIC_LICENSE_KEY: 
+          NEW_RELIC_LICENSE_KEY_SECRET: 
           NEW_RELIC_LOG_SERVER_HOST: localhost
       Layers:
         # This layer includes the New Relic Lambda Extension, a sidecar process that sends telemetry,
