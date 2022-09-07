@@ -1,0 +1,12 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "testing-ado"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-e3jirwb7fo1j"
+s3_prefix = "testing-ado"
+region = "us-west-2"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "NRAccountId=\"2118448\""
+image_repositories = []
