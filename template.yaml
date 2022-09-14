@@ -28,7 +28,6 @@ Resources:
           NEW_RELIC_LAMBDA_HANDLER: ado_pool_status_call.lambda_handler
           NEW_RELIC_ACCOUNT_ID: !Sub ${NRAccountId}
           NEW_RELIC_EXTENSION_SEND_FUNCTION_LOGS: true
-          # NEW_RELIC_EXTENSION_LOG_LEVEL: DEBUG
       Layers:
         # This layer includes the New Relic Lambda Extension, a sidecar process that sends telemetry,
         # as well as the New Relic Agent for Python, and a handler wrapper that makes integration easy.
