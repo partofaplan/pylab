@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 import base64
 import requests
-from newrelic import agent
+import newrelic.agent
 import boto3
 from botocore.exceptions import ClientError
 
-agent.initialize('newrelic.ini')
+newrelic.agent.initialize('newrelic.ini')
+app = newrelic.agent.register_application()
 
 def get_secret():
 
-    secret_name = "arn:aws:secretsmanager:us-west-2:131641800568:secret:platform/azuredevopstonewrelic/adopoolsstatuspat-Jle9vp"
+    secret_name = "platform/azuredevopstonewrelic/adopoolsstatuspat"
     region_name = "us-west-2"
 
     # Create a Secrets Manager client
@@ -81,7 +82,7 @@ def parse_ado_pools_json_output(valid_json):
         agent_hosted = nested['isHosted']
         agent_size = nested['size']
         agent_pool_id = nested['id']
-        if (agent_hosted == False) and (agent_size > 0):
+        if (agent_hosted is False) and (agent_size > 0):
             agent_pool_array.append(agent_pool_id)
         else:
             pass
@@ -100,18 +101,19 @@ def get_agent_json(agent_pool_ids, headers):
             pool_agent_status_array.append(pool_agent_status)
         if pool_agent_status_array.index("online") !=-1:
             print("online")
-            agent.record_custom_event("AdoPoolsStatus", {
+            newrelic.agent.record_custom_event("AdoPoolsStatus", {
                 "ado_pool": f"{pool_id}",
                 "status": "online",
                 "pool_ping": 1
-            })
+            }, application=app)
         else:
             print("offline")
-            agent.record_custom_event("AdoPoolsStatus", {
+            newrelic.agent.record_custom_event("AdoPoolsStatus", {
                 "ado_pool": f"{pool_id}",
                 "status": "offline",
                 "pool_ping": 0
-            })
+            }, application=app)
+
 
 def lambda_handler(event, context):
     json_output = get_ado_pools_json_output(request_headers)
@@ -122,6 +124,3 @@ def lambda_handler(event, context):
     except ValueError:
         print("Unable to call Azure Devops")
     return "Success!"
-
-
-
